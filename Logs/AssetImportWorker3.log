@@ -8210,3 +8210,27 @@ Received Import Request.
 Start importing Assets/Game Assets/Materials/Yellow Target Texture.mat using Guid(2468f5bf3e216414a80d543576a9decf) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd81fd941cbeaf72c98afd95a98906b87') in 0.0149314 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
+========================================================================
+Received Import Request.
+  Time since last request: 137.676172 seconds.
+  path: Assets/Game Assets/Materials/BlackMaterial.mat
+  artifactKey: Guid(ecdec2afc6cd06641897c70106179f34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Game Assets/Materials/BlackMaterial.mat using Guid(ecdec2afc6cd06641897c70106179f34) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd21c515189a85808cfc1af02be2de3ff') in 0.0132766 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Game Assets/Materials/White Material.mat
+  artifactKey: Guid(e53faf60af479cc4cb4d5e1fa1686664) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Game Assets/Materials/White Material.mat using Guid(e53faf60af479cc4cb4d5e1fa1686664) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '90607062da5cfd731c6920b21077ac97') in 0.0107998 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Game Assets/Materials/Yellow Material.mat
+  artifactKey: Guid(2863745ebf1aa9c4e9aed97c086afc8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Game Assets/Materials/Yellow Material.mat using Guid(2863745ebf1aa9c4e9aed97c086afc8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '05dd6d787c10d2fbd1ee9437832a7feb') in 0.0108336 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+

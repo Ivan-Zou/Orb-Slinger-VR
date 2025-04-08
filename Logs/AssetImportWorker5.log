@@ -204,3 +204,11 @@ Unloading 6756 unused Assets / (6.7 MB). Loaded Objects now: 7416.
 Memory consumption went from 161.3 MB to 154.6 MB.
 Total: 14.780400 ms (FindLiveObjects: 0.937100 ms CreateObjectMapping: 1.574100 ms MarkObjects: 6.814500 ms  DeleteObjects: 5.451600 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 463283.559425 seconds.
+  path: Assets/Game Assets/Materials/Blue Material.mat
+  artifactKey: Guid(74e8dbcf4a7f0834e8f4f37cee7b96a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Game Assets/Materials/Blue Material.mat using Guid(74e8dbcf4a7f0834e8f4f37cee7b96a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9d24a917b3d6ffcad7537cd82ba608d9') in 0.7274333 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
