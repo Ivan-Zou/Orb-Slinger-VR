@@ -6,10 +6,10 @@ PhysicsMaterial:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bouncy Material
+  m_Name: Super Bouncy Material
   serializedVersion: 2
-  m_DynamicFriction: 0.01
-  m_StaticFriction: 0.01
-  m_Bounciness: 0.9
-  m_FrictionCombine: 2
+  m_DynamicFriction: 0
+  m_StaticFriction: 0
+  m_Bounciness: 1
+  m_FrictionCombine: 1
   m_BounceCombine: 3
