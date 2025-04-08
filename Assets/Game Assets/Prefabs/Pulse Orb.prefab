@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3173088726696489088}
   - component: {fileID: -4755636503714216986}
   - component: {fileID: 5499467710139817726}
+  - component: {fileID: -3190989940632970780}
   m_Layer: 0
   m_Name: Pulse Orb
   m_TagString: Untagged
@@ -316,6 +317,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbdc21d6750ca444b85db74912c12f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3190989940632970780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669805675023053511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c77c38dd23eca345907f97447998afd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwSound: {fileID: 8300000, guid: 1e356ace941b0334c9c8291ae534cf2b, type: 3}
+  bounceSound: {fileID: 8300000, guid: 4b4098386dc81a644b43df941d78510f, type: 3}
 --- !u!1001 &2971517343363940104
 PrefabInstance:
   m_ObjectHideFlags: 0
