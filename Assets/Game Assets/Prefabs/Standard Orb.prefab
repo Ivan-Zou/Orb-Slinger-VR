@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5630769575523873844}
   - component: {fileID: 4962621387905148764}
   - component: {fileID: 2198256472841751981}
+  - component: {fileID: -5359748589634469764}
   m_Layer: 0
   m_Name: Standard Orb
   m_TagString: Untagged
@@ -191,19 +192,7 @@ MonoBehaviour:
       m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8952522833790561439, guid: dd7c28c8e5fe9cc4c95c5522e924f4bc, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -302,6 +291,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &-5359748589634469764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8031541141263138588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c175a0c0755743c42b18895189116d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6000168408680615514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -350,9 +351,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1007397990383220347, guid: a99d3db417864094e88589cfa5dad958, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5881998453441917094, guid: a99d3db417864094e88589cfa5dad958, type: 3}
       propertyPath: m_Name
       value: Red Trail
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881998453441917094, guid: a99d3db417864094e88589cfa5dad958, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

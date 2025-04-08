@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8247683166142319265}
   - component: {fileID: 6907762931084206514}
   - component: {fileID: 3173088726696489088}
+  - component: {fileID: -4755636503714216986}
   m_Layer: 0
   m_Name: Pulse Orb
   m_TagString: Untagged
@@ -290,6 +291,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &-4755636503714216986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669805675023053511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c175a0c0755743c42b18895189116d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2971517343363940104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298,9 +311,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3664026960095928164}
     m_Modifications:
+    - target: {fileID: 1501307723596499796, guid: 80b95cdfe76d35949a396b153b7d36d1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8497597545467429316, guid: 80b95cdfe76d35949a396b153b7d36d1, type: 3}
       propertyPath: m_Name
       value: Yellow Trail
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497597545467429316, guid: 80b95cdfe76d35949a396b153b7d36d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8961647826113028925, guid: 80b95cdfe76d35949a396b153b7d36d1, type: 3}
       propertyPath: m_LocalPosition.x
