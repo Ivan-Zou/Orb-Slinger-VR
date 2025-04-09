@@ -1086,7 +1086,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: lifetime
-      value: 30
+      value: 6000
       objectReference: {fileID: 0}
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: rotationSpeedX
@@ -1094,7 +1094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: rotationSpeedY
-      value: 1
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: rotationSpeedZ
@@ -2417,7 +2417,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: lifetime
-      value: 60
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: rotationSpeedX
@@ -2429,7 +2429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: rotationSpeedZ
-      value: 1
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4026651355013715975, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: m_Name
@@ -2490,7 +2490,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: shrinkSpeed
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4026651355013715975, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: m_Name
@@ -3121,15 +3121,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: rotationSpeedX
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: rotationSpeedY
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -364749159832077181, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: rotationSpeedZ
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4026651355013715975, guid: e542f1aa51abd5c46807d8de39617dda, type: 3}
       propertyPath: m_Name
