@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 640543141528840546}
   - component: {fileID: 7402571401716395092}
   - component: {fileID: 4804603908159067246}
+  - component: {fileID: -364749159832077181}
   m_Layer: 0
   m_Name: Score Zone
   m_TagString: Scoreable
@@ -122,3 +123,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointValue: 0
+--- !u!114 &-364749159832077181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026651355013715975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c56830901ff594ea6f47c11aa6d1a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeedX: 0
+  rotationSpeedY: 0
+  rotationSpeedZ: 0
+  shrinkSpeed: 0
+  minScaleThreshold: 0.05
+  lifetime: -1
