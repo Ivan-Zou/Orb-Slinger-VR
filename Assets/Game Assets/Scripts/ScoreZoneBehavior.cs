@@ -32,7 +32,7 @@ public class ScoreZoneBehavior : MonoBehaviour {
             Vector3 newScale = transform.localScale - new Vector3(shrinkAmount, shrinkAmount, 0);
 
             // Avoid negative or too-small scale
-            if (newScale.x <= minScaleThreshold || newScale.y <= minScaleThreshold || newScale.z <= minScaleThreshold) {
+            if (newScale.x <= minScaleThreshold || newScale.y <= minScaleThreshold) {
                 Destroy(gameObject);
                 return;
             }
