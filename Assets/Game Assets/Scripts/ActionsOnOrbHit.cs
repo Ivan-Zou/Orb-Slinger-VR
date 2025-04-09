@@ -13,6 +13,8 @@ public class ActionsOnOrbHit : MonoBehaviour {
             // Destroy the target/score zone if the orb bounced at least once
             if (bounceCount > 0) {
                 Destroy(gameObject);
+                // Destory the orb
+                Destroy(bounceCounter.gameObject);
                 // Do stuff with pointValue
             }
             
