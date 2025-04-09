@@ -7,8 +7,11 @@ public class OrbBounceCounter : MonoBehaviour {
 
     private bool hasBeenThrown = false;
 
-    void Awake() {
+    void Start() {
         bounceCount = 0;
+    }
+
+    void Awake() {
         grabInteractable = GetComponent<XRGrabInteractable>();
 
         // Listen to grab and release events
@@ -23,6 +26,7 @@ public class OrbBounceCounter : MonoBehaviour {
 
     private void OnReleased(SelectExitEventArgs args) {
         hasBeenThrown = true;
+        bounceCount = 0;
     }
 
     private void OnCollisionEnter(Collision collision) {
