@@ -21,7 +21,7 @@ public class OrbSoundEffects : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (hasBeenThrown && collision.relativeVelocity.magnitude > 0.1f) {
+        if (hasBeenThrown && collision.relativeVelocity.magnitude > 0.01f) {
             PlaySound(bounceSound);
         }
     }

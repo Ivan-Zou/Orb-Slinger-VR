@@ -32,7 +32,7 @@ public class OrbBounceCounter : MonoBehaviour {
     private void OnCollisionEnter(Collision collision) {
         Collider collider = collision.collider;
         // increment bounce count if the orb has been thrown and bounces on something thats not a scoreable object
-        if (hasBeenThrown && collision.relativeVelocity.magnitude > 0.1f & !collider.CompareTag("Scoreable")) {
+        if (hasBeenThrown && collision.relativeVelocity.magnitude > 0.01f & !collider.CompareTag("Scoreable")) {
             bounceCount++;
         }
     }

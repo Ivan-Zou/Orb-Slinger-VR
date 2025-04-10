@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4219552654209589230}
   - component: {fileID: 2066962195976953055}
   - component: {fileID: -4256668866219788823}
+  - component: {fileID: 786947150161529265}
   m_Layer: 0
   m_Name: Standard Orb
   m_TagString: Orb
@@ -345,6 +346,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceCount: 0
+--- !u!114 &786947150161529265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8031541141263138588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a87d56b742627f947a99c84956f6d4d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedThreshold: 0.5
+  checkDelay: 1
+  maxBounces: 30
+  minSpeedDuration: 1
 --- !u!1001 &6000168408680615514
 PrefabInstance:
   m_ObjectHideFlags: 0
