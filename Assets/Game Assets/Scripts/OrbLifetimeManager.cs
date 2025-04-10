@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(Rigidbody), typeof(XRGrabInteractable))]
-public class OrbLifetimeManager : MonoBehaviour
-{
+public class OrbLifetimeManager : MonoBehaviour {
     public float speedThreshold = 0.5f;
 
     // Wait this long after throw before checking
