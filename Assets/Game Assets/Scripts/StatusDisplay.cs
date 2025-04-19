@@ -11,7 +11,7 @@ public class StatusDisplay : MonoBehaviour
     void Start()
     {
         statusText = GetComponent<TMP_Text>();
-        state = GameObject.Find("Game State").GetComponent<GameState>();  
+        state = GameObject.FindGameObjectWithTag("State").GetComponent<GameState>(); 
     }
 
     // Update is called once per frame

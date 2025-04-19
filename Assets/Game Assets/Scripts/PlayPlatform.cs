@@ -27,12 +27,9 @@ public class PlayPlatform : MonoBehaviour
         xPos = maxPoint.x;
         zPos = maxPoint.z;
         teleportPos = new Vector3(xNeg  + ((xPos - xNeg) / 2), transform.position.y, zNeg + ((zPos - zNeg) / 2));
-        Debug.LogFormat("xNeg = {0}, zNeg = {1}, xPos = {2}, zPos = {3}", xNeg, zNeg, xPos, xPos);
     }
 
     void TeleportPlayer() {
-        Debug.Log("Teleporting the player to the center of the platform");
-        Debug.LogFormat("Current Position: {0} | New Position: {1}", playerTransform.position, teleportPos);
         // Create Teleport Request
         TeleportRequest req = new TeleportRequest() {
             destinationPosition = teleportPos,

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Orb
   - Scoreable
+  - State
+  - HiScore
+  - Score
+  - MenuController
+  - Left
+  - Right
   layers:
   - Default
   - TransparentFX

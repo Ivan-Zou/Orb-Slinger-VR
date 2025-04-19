@@ -10,7 +10,7 @@ public class ActionsOnOrbHit : MonoBehaviour {
 
     void Start()
     {
-        state = GameObject.Find("Game State").GetComponent<GameState>();
+        state = GameObject.FindGameObjectWithTag("State").GetComponent<GameState>(); 
     }
 
     private void OnCollisionEnter(Collision collision) {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,18 +7,27 @@ public class TimedGameState : GameState
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float timer = 120.0f;
 
-
-    void Start() {
-        
+    protected override void Start() {
+        base.Start();
     }
 
     protected override void CheckWinLoss()
     {
-        base.CheckWinLoss();
         if (timer <= 0.0f) {
             Debug.Log("Time is up");
-            // Load Result Scene Here
+            lost = true;
         }
+        base.CheckWinLoss();
+    }
+
+    public override int GetHiScore()
+    {
+        return PlayerPrefs.GetInt("TimedHiScore", 0);
+    }
+
+    protected override void SetHiScore(int newScore)
+    {
+        PlayerPrefs.SetInt("TimedHiScore", Math.Max(GetHiScore(), playerScore));
     }
 
     public override string GetStatusText() {

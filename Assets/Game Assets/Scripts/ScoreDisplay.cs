@@ -10,7 +10,7 @@ public class ScoreDisplay : MonoBehaviour
     void Start()
     {
         scoreText = GetComponent<TMP_Text>();
-        state = GameObject.Find("Game State").GetComponent<GameState>();  
+        state = GameObject.FindGameObjectWithTag("State").GetComponent<GameState>();  
     }
 
     // Update is called once per frame
