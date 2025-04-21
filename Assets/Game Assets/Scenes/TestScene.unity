@@ -4576,7 +4576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resultMenu: {fileID: 93648027796852118, guid: ebbf4b1f5a6a53840a043aa200e95565, type: 3}
-  timer: 10
+  timer: 120
 --- !u!4 &1584843070
 Transform:
   m_ObjectHideFlags: 0
