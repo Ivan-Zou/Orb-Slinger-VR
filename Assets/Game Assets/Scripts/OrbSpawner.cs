@@ -6,10 +6,16 @@ public class OrbSpawner : MonoBehaviour {
     [Header("Orb Prefabs")]
     public GameObject standardOrb;
     public GameObject pulseOrb;
+    public GameObject splitterOrb;
+    public GameObject stickyOrb;
+    public GameObject timedOrb;
 
     [Header("Spawn Options")]
     public bool spawnStandard = true;
     public bool spawnPulse = false;
+    public bool spawnSplitter = false;
+    public bool spawnSticky = false;
+    public bool spawnTimed = false;
 
     public bool spawnInPlace = true;
     public float spawnGap = 0.25f;
@@ -33,6 +39,9 @@ public class OrbSpawner : MonoBehaviour {
 
         if (spawnStandard) TrySpawnOrb("Standard", standardOrb, spawnIndex++);
         if (spawnPulse) TrySpawnOrb("Pulse", pulseOrb, spawnIndex++);
+        if (spawnSplitter) TrySpawnOrb("Splitter", splitterOrb, spawnIndex++);
+        if (spawnSticky) TrySpawnOrb("Sticky", stickyOrb, spawnIndex++);
+        if (spawnTimed) TrySpawnOrb("Timed", timedOrb, spawnIndex++);
     }
 
     void TrySpawnOrb(string orbType, GameObject prefab, int index) {
@@ -76,5 +85,8 @@ public class OrbSpawner : MonoBehaviour {
         int spawnIndex = 0;
         if (orbType == "Standard") TrySpawnOrb("Standard", standardOrb, spawnIndex);
         else if (orbType == "Pulse") TrySpawnOrb("Pulse", pulseOrb, spawnIndex + (spawnStandard ? 1 : 0));
+        else if (orbType == "Splitter") TrySpawnOrb("Splitter", splitterOrb, spawnIndex + (spawnStandard ? 1 : 0) + (spawnPulse ? 1 : 0));
+        else if (orbType == "Sticky") TrySpawnOrb("Sticky", stickyOrb, spawnIndex + (spawnStandard ? 1 : 0) + (spawnPulse ? 1 : 0) + (spawnSplitter ? 1 : 0));
+        else if (orbType == "Timed") TrySpawnOrb("Timed", timedOrb, spawnIndex + (spawnStandard ? 1 : 0) + (spawnPulse ? 1 : 0) + (spawnSplitter ? 1 : 0) + (spawnSticky ? 1 : 0));
     }
 }
