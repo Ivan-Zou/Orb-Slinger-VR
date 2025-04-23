@@ -138,7 +138,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -362,6 +362,7 @@ MonoBehaviour:
   checkDelay: 1
   maxBounces: 30
   minSpeedDuration: 1
+  timedOrbExplosionSound: {fileID: 0}
 --- !u!1001 &3812463033144389111
 PrefabInstance:
   m_ObjectHideFlags: 0
