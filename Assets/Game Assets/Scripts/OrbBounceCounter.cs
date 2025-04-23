@@ -5,14 +5,11 @@ public class OrbBounceCounter : MonoBehaviour {
     public int bounceCount;
     private XRGrabInteractable grabInteractable;
 
-    private bool hasBeenThrown = false;
-
-    void Start() {
-        bounceCount = 0;
-    }
+    public bool hasBeenThrown = false;
 
     void Awake() {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        bounceCount = 0;
 
         // Listen to grab and release events
         grabInteractable.selectEntered.AddListener(OnGrabbed);

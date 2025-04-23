@@ -14,7 +14,7 @@ public class OrbLifetimeManager : MonoBehaviour {
     private Rigidbody rb;
     private XRGrabInteractable grabInteractable;
 
-    private bool hasBeenThrown = false;
+    public bool hasBeenThrown = false;
     private int bounceCount = 0;
     private float lowSpeedTimer = 0;
 
@@ -75,6 +75,12 @@ public class OrbLifetimeManager : MonoBehaviour {
         } else {
             // Reset timer if speed picks up again
             lowSpeedTimer = 0; 
+        }
+    }
+
+    public void StartMonitoring() {
+        if (!IsInvoking(nameof(CheckSpeed))) {
+            InvokeRepeating(nameof(CheckSpeed), checkDelay, 0.1f);
         }
     }
 

@@ -7,7 +7,7 @@ public class OrbSoundEffects : MonoBehaviour {
 
     private XRGrabInteractable grabInteractable;
 
-    private bool hasBeenThrown = false;
+    public bool hasBeenThrown = false;
 
     void Awake() {
         grabInteractable = GetComponent<XRGrabInteractable>();
