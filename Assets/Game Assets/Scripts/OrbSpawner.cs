@@ -62,9 +62,15 @@ public class OrbSpawner : MonoBehaviour {
         GameObject orb = Instantiate(prefab, spawnPos, Quaternion.identity);
         spawnedOrbs[orbType] = orb;
 
+        // Set spawner reference for TimedOrb specifically
+        TimedOrb timed = orb.GetComponent<TimedOrb>();
+        if (timed != null) {
+            timed.SetSpawner(this);
+        }
+
         // Subscribe to grab event
         XRGrabInteractable grab = orb.GetComponent<XRGrabInteractable>();
-        if (grab != null) {
+        if (grab != null && orbType != "Timed") {
             grab.selectEntered.AddListener((args) => OnOrbGrabbed(orbType));
         }
     }
@@ -88,5 +94,13 @@ public class OrbSpawner : MonoBehaviour {
         else if (orbType == "Splitter") TrySpawnOrb("Splitter", splitterOrb, spawnIndex + (spawnStandard ? 1 : 0) + (spawnPulse ? 1 : 0));
         else if (orbType == "Sticky") TrySpawnOrb("Sticky", stickyOrb, spawnIndex + (spawnStandard ? 1 : 0) + (spawnPulse ? 1 : 0) + (spawnSplitter ? 1 : 0));
         else if (orbType == "Timed") TrySpawnOrb("Timed", timedOrb, spawnIndex + (spawnStandard ? 1 : 0) + (spawnPulse ? 1 : 0) + (spawnSplitter ? 1 : 0) + (spawnSticky ? 1 : 0));
+    }
+
+    public void OnTimedOrbDestroyed() {
+        if (spawnedOrbs.ContainsKey("Timed")) {
+            spawnedOrbs["Timed"] = null;
+        }
+
+        StartCoroutine(RespawnAfterDelay("Timed"));
     }
 }
