@@ -12,6 +12,7 @@ TagManager:
   - MenuController
   - Left
   - Right
+  - Spawner
   layers:
   - Default
   - TransparentFX

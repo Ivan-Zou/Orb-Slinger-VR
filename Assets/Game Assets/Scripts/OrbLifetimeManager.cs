@@ -18,6 +18,13 @@ public class OrbLifetimeManager : MonoBehaviour {
     private int bounceCount = 0;
     private float lowSpeedTimer = 0;
 
+    OrbSpawner spawner;
+    public AudioClip timedOrbExplosionSound;
+
+    void Start() {
+        spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<OrbSpawner>();
+    }
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
         grabInteractable = GetComponent<XRGrabInteractable>();
@@ -36,6 +43,13 @@ public class OrbLifetimeManager : MonoBehaviour {
             bounceCount++;
             if (bounceCount >= maxBounces) {
                 Destroy(gameObject);
+                // Respawn the orb if its a Timed Orb
+                TimedOrb timed = gameObject.GetComponent<TimedOrb>();
+                if (timed != null) {
+                    spawner.OnTimedOrbDestroyed();
+                    // Play explosion sound
+                    AudioSource.PlayClipAtPoint(timedOrbExplosionSound, gameObject.transform.position);
+                }
             }
         }
     }
@@ -48,6 +62,15 @@ public class OrbLifetimeManager : MonoBehaviour {
             lowSpeedTimer += 0.1f;
             if (lowSpeedTimer >= minSpeedDuration) {
                 Destroy(gameObject);
+                // Respawn the orb if its a Timed Orb
+                TimedOrb timed = gameObject.GetComponent<TimedOrb>();
+                if (timed != null) {
+                    spawner.OnTimedOrbDestroyed();
+                    // Play explosion sound
+                    if (timedOrbExplosionSound != null) {
+                        AudioSource.PlayClipAtPoint(timedOrbExplosionSound, gameObject.transform.position);
+                    }
+                }
             }
         } else {
             // Reset timer if speed picks up again

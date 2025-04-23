@@ -8,9 +8,11 @@ public class ActionsOnOrbHit : MonoBehaviour {
     public AudioClip hitSound;
     public GameState state;
 
-    void Start()
-    {
+    OrbSpawner spawner;
+
+    void Start() {
         state = GameObject.FindGameObjectWithTag("State").GetComponent<GameState>(); 
+        spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<OrbSpawner>();
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -28,6 +30,11 @@ public class ActionsOnOrbHit : MonoBehaviour {
                 Instantiate(hitExplosion, gameObject.transform.position, Quaternion.identity);
                 // Destroy the target/score zone
                 Destroy(gameObject);
+                // Respawn the orb if its a Timed Orb
+                TimedOrb timed = collider.gameObject.GetComponent<TimedOrb>();
+                if (timed != null) {
+                    spawner.OnTimedOrbDestroyed();
+                }
                 // Destroy the orb
                 Destroy(bounceCounter.gameObject);
                 // Do stuff with pointValue
