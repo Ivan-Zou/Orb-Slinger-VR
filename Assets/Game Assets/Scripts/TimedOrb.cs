@@ -36,13 +36,18 @@ public class TimedOrb : MonoBehaviour {
         } else {
             // Destroy the orb
             Destroy(gameObject);
-            hasExploded = true;
-
-            // Play explosion sound
-            AudioSource.PlayClipAtPoint(explosionSound, gameObject.transform.position);
-
-            // Respawn the orb
-            spawner.OnTimedOrbDestroyed();
+            
+            OnTimedOrbExplosion();
         }
+    }
+
+    public void OnTimedOrbExplosion() {
+        hasExploded = true;
+
+        // Play explosion sound
+        AudioSource.PlayClipAtPoint(explosionSound, gameObject.transform.position);
+
+        // Respawn the orb
+        spawner.OnTimedOrbDestroyed();
     }
 }
