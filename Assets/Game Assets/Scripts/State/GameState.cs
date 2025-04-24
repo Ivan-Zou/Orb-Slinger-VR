@@ -1,4 +1,7 @@
+using Unity.VisualScripting;
+using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public abstract class GameState : MonoBehaviour
 {
@@ -69,6 +72,10 @@ public abstract class GameState : MonoBehaviour
         // Destroy All Targets
         foreach (GameObject orb in GameObject.FindGameObjectsWithTag("Scoreable")) {
             Destroy(orb);
+        }
+        // Destroy Redirectors
+        foreach (GameObject redirector in GameObject.FindGameObjectsWithTag("Redirector")) {
+            Destroy(redirector);
         }
         Instantiate(resultMenu);
         this.enabled = false;

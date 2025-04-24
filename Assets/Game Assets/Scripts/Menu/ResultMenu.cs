@@ -12,7 +12,7 @@ public class ResultMenu : MonoBehaviour
     
     public float offsetRadius = 0.3f;
     public float distanceToHead = 4;
-    public float smoothFactor = 0.5f;
+    public float yPos = 2.5f;
     Camera head;
 
     void Start()
@@ -28,24 +28,25 @@ public class ResultMenu : MonoBehaviour
                 hiScoreText.text = "Hi-Score: " + state.GetHiScore().ToString("0000");
             }
         }
+        transform.eulerAngles = new Vector3(0.0f, head.transform.eulerAngles.y, 0.0f);
+        Vector3 headCenter = head.transform.position + head.transform.forward * distanceToHead;
+        Vector3 direction = transform.position - headCenter;
+        Vector3 targetPos = transform.position = headCenter + direction.normalized * offsetRadius;
+        transform.position = new Vector3(targetPos.x, yPos, targetPos.z);
     }
 
     public void Exit() {
-        Debug.Log("Exit Game");
+        SceneManager.LoadSceneAsync(0);
     }
     
 
     public void Restart() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
     
     void Update()
     {
-        transform.rotation = head.transform.rotation;
-        Vector3 headCenter = head.transform.position + head.transform.forward * distanceToHead;
-        Vector3 direction = transform.position - headCenter;
-        Vector3 targetPos = headCenter + direction.normalized * offsetRadius;
-        transform.position = Vector3.Lerp(transform.position, targetPos, smoothFactor);
+
     }
 }

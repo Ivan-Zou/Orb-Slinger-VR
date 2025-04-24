@@ -5,6 +5,7 @@ public class ScoreDisplay : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public TMP_Text scoreText;
+    public bool addLabel = false;
     GameState state;
 
     void Start()
@@ -16,6 +17,6 @@ public class ScoreDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = state.GetScoreText();
+        scoreText.text = (addLabel ? "Score: " : "")  + state.GetScoreText();
     }
 }

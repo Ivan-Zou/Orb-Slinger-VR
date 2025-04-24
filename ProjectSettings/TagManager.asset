@@ -13,6 +13,7 @@ TagManager:
   - Left
   - Right
   - Spawner
+  - Redirector
   layers:
   - Default
   - TransparentFX

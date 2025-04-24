@@ -6,6 +6,8 @@ public class StatusDisplay : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public TMP_Text statusText;
+    public bool addLabel = false;
+    public string label;
     GameState state;
 
     void Start()
@@ -17,6 +19,6 @@ public class StatusDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        statusText.text = state.GetStatusText();
+        statusText.text = (addLabel ? label : "") + state.GetStatusText();
     }
 }
