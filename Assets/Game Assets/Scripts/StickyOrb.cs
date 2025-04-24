@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class StickyOrb : MonoBehaviour {
-    public bool canStick = true;
+    bool canStick = true;
     public float launchForce = 5.0f;
     public float delayBeforeLaunch = 1.0f;
 

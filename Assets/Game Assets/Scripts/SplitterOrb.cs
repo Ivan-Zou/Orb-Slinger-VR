@@ -4,7 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class SplitterOrb : MonoBehaviour {
     public GameObject splitterOrbPrefab;
-    public bool canSplit = true;
+    bool canSplit = true;
 
     private Rigidbody rb;
     private bool hasBeenThrown = false;
