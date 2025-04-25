@@ -8,7 +8,11 @@ public class LockRotationToBounds : MonoBehaviour
     private Quaternion grabOffsetRotation;
     private XRBaseInteractor currentInteractor;
 
-    private const float MaxAngle = 15f;
+    [Range(0f, 45f)]
+    public float MaxAngle = 15f;
+
+    [Range(1f, 100f)]
+    public float RotationSpeed = 15f;
 
     void Awake()
     {
@@ -59,7 +63,7 @@ public class LockRotationToBounds : MonoBehaviour
         Quaternion clampedRotation = Quaternion.Euler(clampedEuler);
 
         // Smoothly rotate
-        transform.rotation = Quaternion.Slerp(transform.rotation, clampedRotation, Time.deltaTime * 15f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, clampedRotation, Time.deltaTime * RotationSpeed);
     }
 
     private float ClampAngleDelta(float baseAngle, float targetAngle, float maxDelta)
