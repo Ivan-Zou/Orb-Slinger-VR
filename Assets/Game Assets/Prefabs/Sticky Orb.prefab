@@ -162,7 +162,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 1
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -378,7 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6798898815938ee4bb403e3a93793cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canStick: 1
   launchForce: 5
   delayBeforeLaunch: 1
 --- !u!1001 &3812463033144389111
