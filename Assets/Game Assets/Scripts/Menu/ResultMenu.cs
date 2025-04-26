@@ -7,6 +7,7 @@ public class ResultMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     GameState state;
+    public TMP_Text titleText;
     TMP_Text hiScoreText;
     TMP_Text scoreText;
     
@@ -22,10 +23,12 @@ public class ResultMenu : MonoBehaviour
         foreach (Transform child in gameObject.transform) {
             if (child.CompareTag("Score")) {
                 scoreText = child.GetComponent<TMP_Text>();
-                scoreText.text = "Score: " + state.GetScoreText();
+                scoreText.SetText("Score: " + state.GetScoreText());
             } else if (child.CompareTag("HiScore")) {
                 hiScoreText = child.GetComponent<TMP_Text>();
-                hiScoreText.text = "Hi-Score: " + state.GetHiScore().ToString("0000");
+                hiScoreText.SetText("Hi-Score: " + state.GetHiScore().ToString("0000"));
+            } else if (child.CompareTag("Title")) {
+                titleText = child.GetComponent<TMP_Text>();
             }
         }
         transform.eulerAngles = new Vector3(0.0f, head.transform.eulerAngles.y, 0.0f);
@@ -33,6 +36,10 @@ public class ResultMenu : MonoBehaviour
         Vector3 direction = transform.position - headCenter;
         Vector3 targetPos = transform.position = headCenter + direction.normalized * offsetRadius;
         transform.position = new Vector3(targetPos.x, yPos, targetPos.z);
+    }
+
+    public void SetTitle(string title) {
+        titleText.SetText(title);
     }
 
     public void Exit() {

@@ -8,7 +8,8 @@ public abstract class GameState : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected int playerScore = 0;
     public GameObject resultMenu;
-    protected bool lost = false;
+    protected bool gameOver = false;
+    protected string resultTitle = "";
 
     GameObject[] grabControllers;
     GameObject[] menuControllers;
@@ -16,7 +17,7 @@ public abstract class GameState : MonoBehaviour
     protected virtual void Start() {
         // Set TimeScale to 1.0f
         Time.timeScale = 1.0f;
-        lost = false;
+        gameOver = false;
         if (grabControllers == null) {
             grabControllers = GameObject.FindGameObjectsWithTag("GameController");
         }
@@ -45,7 +46,7 @@ public abstract class GameState : MonoBehaviour
     public abstract string GetStatusText();
 
     protected virtual void CheckWinLoss() {
-        if (lost) {
+        if (gameOver) {
             ShowResult();
         }
     }
@@ -77,7 +78,9 @@ public abstract class GameState : MonoBehaviour
         foreach (GameObject redirector in GameObject.FindGameObjectsWithTag("Redirector")) {
             Destroy(redirector);
         }
-        Instantiate(resultMenu);
+        GameObject menu = Instantiate(resultMenu);
+        Debug.Log(resultTitle);
+        menu.GetComponent<ResultMenu>()?.SetTitle(resultTitle);
         this.enabled = false;
     }
 

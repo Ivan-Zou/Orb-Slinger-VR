@@ -9,13 +9,14 @@ public class TimedGameState : GameState
 
     protected override void Start() {
         base.Start();
+        resultTitle = "Result";
     }
 
     protected override void CheckWinLoss()
     {
         if (timer <= 0.0f) {
             Debug.Log("Time is up");
-            lost = true;
+            gameOver = true;
         }
         base.CheckWinLoss();
     }

@@ -12,7 +12,10 @@ public class ActionsOnOrbHit : MonoBehaviour {
 
     void Start() {
         state = GameObject.FindGameObjectWithTag("State").GetComponent<GameState>(); 
-        spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<OrbSpawner>();
+        GameObject spawnerObj = GameObject.FindGameObjectWithTag("Spawner");
+        if (spawnerObj != null) {
+            spawner = spawnerObj.GetComponent<OrbSpawner>();
+        }
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -32,7 +35,7 @@ public class ActionsOnOrbHit : MonoBehaviour {
                 Destroy(gameObject);
                 // Respawn the orb if its a Timed Orb
                 TimedOrb timed = collider.gameObject.GetComponent<TimedOrb>();
-                if (timed != null) {
+                if (timed != null && spawner != null) {
                     spawner.OnTimedOrbDestroyed();
                 }
                 // Destroy the orb
