@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2066962195976953055}
   - component: {fileID: -4256668866219788823}
   - component: {fileID: 786947150161529265}
+  - component: {fileID: 3359814727442489794}
   m_Layer: 0
   m_Name: Sticky Orb
   m_TagString: Orb
@@ -161,7 +162,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 1
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -333,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwSound: {fileID: 8300000, guid: 1e356ace941b0334c9c8291ae534cf2b, type: 3}
   bounceSound: {fileID: 8300000, guid: 4b4098386dc81a644b43df941d78510f, type: 3}
+  hasBeenThrown: 0
 --- !u!114 &-4256668866219788823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceCount: 0
+  hasBeenThrown: 0
 --- !u!114 &786947150161529265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,8 +364,22 @@ MonoBehaviour:
   speedThreshold: 0.5
   checkDelay: 1
   maxBounces: 30
-  minSpeedDuration: 1
-  timedOrbExplosionSound: {fileID: 0}
+  minSpeedDuration: 2.5
+  hasBeenThrown: 0
+--- !u!114 &3359814727442489794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8031541141263138588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6798898815938ee4bb403e3a93793cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchForce: 5
+  delayBeforeLaunch: 1
 --- !u!1001 &3812463033144389111
 PrefabInstance:
   m_ObjectHideFlags: 0

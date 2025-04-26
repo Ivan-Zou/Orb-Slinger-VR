@@ -401,7 +401,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 1
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -573,6 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwSound: {fileID: 8300000, guid: 1e356ace941b0334c9c8291ae534cf2b, type: 3}
   bounceSound: {fileID: 8300000, guid: 4b4098386dc81a644b43df941d78510f, type: 3}
+  hasBeenThrown: 0
 --- !u!114 &-4256668866219788823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,6 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceCount: 0
+  hasBeenThrown: 0
 --- !u!114 &786947150161529265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,7 +604,7 @@ MonoBehaviour:
   checkDelay: 1
   maxBounces: 30
   minSpeedDuration: 1
-  timedOrbExplosionSound: {fileID: 8300000, guid: bfba815355553ac4b810fe5b925b155d, type: 3}
+  hasBeenThrown: 0
 --- !u!114 &-4437090764534135549
 MonoBehaviour:
   m_ObjectHideFlags: 0
