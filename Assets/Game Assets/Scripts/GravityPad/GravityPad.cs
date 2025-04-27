@@ -127,7 +127,6 @@ public class GravityPad : MonoBehaviour
         }
     }
 
-    // TODO: If we want bounces to count, need to modify Box Collider IsTrigger = false and then modify the below function
     void OnTriggerStay(Collider other)
     {
         Rigidbody rb = other.attachedRigidbody;
@@ -135,6 +134,29 @@ public class GravityPad : MonoBehaviour
         {
             Vector3 worldForce = transform.up * forceStrength;
             rb.AddForce(worldForce, ForceMode.Acceleration);
+        }
+    }
+
+    private HashSet<Rigidbody> _bouncedBodies = new HashSet<Rigidbody>();
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var orbCounter = other.GetComponent<OrbBounceCounter>();
+        Rigidbody rb = other.attachedRigidbody;
+
+        if (orbCounter != null && rb != null && orbCounter.hasBeenThrown && !_bouncedBodies.Contains(rb))
+        {
+            orbCounter.bounceCount++;
+            _bouncedBodies.Add(rb);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Rigidbody rb = other.attachedRigidbody;
+        if (rb != null)
+        {
+            _bouncedBodies.Remove(rb);
         }
     }
 }
