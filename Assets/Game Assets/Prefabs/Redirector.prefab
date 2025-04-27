@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -302,5 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b752b0265f39e8488f3417dceb3665a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsRotatable: 0
+  NonRotatableMaterial: {fileID: 2100000, guid: c5c529711df422843a65d863df7364b0, type: 2}
+  RotatableMaterial: {fileID: 2100000, guid: 87cfba098a77f5441a8c9b649e6e85ce, type: 2}
   MaxAngle: 15
   RotationSpeed: 15

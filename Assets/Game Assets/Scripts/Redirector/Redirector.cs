@@ -2,32 +2,56 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(XRGrabInteractable))]
-public class LockRotationToBounds : MonoBehaviour
+public class Redirector : MonoBehaviour
 {
-    private Quaternion sceneStartRotation;
-    private Quaternion grabOffsetRotation;
-    private XRBaseInteractor currentInteractor;
+    [Header("Redirector Settings")]
+    public bool IsRotatable = false;
 
+    [Header("Materials")]
+    public Material NonRotatableMaterial;
+    public Material RotatableMaterial;
+
+    [Header("Rotation Settings")]
     [Range(0f, 45f)]
     public float MaxAngle = 15f;
 
     [Range(1f, 100f)]
     public float RotationSpeed = 15f;
 
+    private XRGrabInteractable grabInteractable;
+    private Quaternion sceneStartRotation;
+    private Quaternion grabOffsetRotation;
+    private XRBaseInteractor currentInteractor;
+
     void Awake()
     {
+        grabInteractable = GetComponent<XRGrabInteractable>();
+
+        // Enable/disable grab based on IsRotatable
+        grabInteractable.enabled = IsRotatable;
+
         sceneStartRotation = transform.rotation;
 
-        var grab = GetComponent<XRGrabInteractable>();
-        grab.selectEntered.AddListener(OnSelectEntered);
-        grab.selectExited.AddListener(OnSelectExited);
+        var renderer = GetComponent<MeshRenderer>();
+        if (renderer != null)
+        {
+            renderer.material = IsRotatable ? RotatableMaterial : NonRotatableMaterial;
+        }
+
+        if (IsRotatable)
+        {
+            grabInteractable.selectEntered.AddListener(OnSelectEntered);
+            grabInteractable.selectExited.AddListener(OnSelectExited);
+        }
     }
 
     void OnDestroy()
     {
-        var grab = GetComponent<XRGrabInteractable>();
-        grab.selectEntered.RemoveListener(OnSelectEntered);
-        grab.selectExited.RemoveListener(OnSelectExited);
+        if (IsRotatable)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnSelectEntered);
+            grabInteractable.selectExited.RemoveListener(OnSelectExited);
+        }
     }
 
     private void OnSelectEntered(SelectEnterEventArgs args)
