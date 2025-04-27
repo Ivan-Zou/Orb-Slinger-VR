@@ -78,6 +78,11 @@ public abstract class GameState : MonoBehaviour
         foreach (GameObject redirector in GameObject.FindGameObjectsWithTag("Redirector")) {
             Destroy(redirector);
         }
+        // Destroy Gravity Pads
+        foreach (GameObject gravityPad in GameObject.FindGameObjectsWithTag("GravityPad"))
+        {
+            Destroy(gravityPad);
+        }
         GameObject menu = Instantiate(resultMenu);
         Debug.Log(resultTitle);
         menu.GetComponent<ResultMenu>()?.SetTitle(resultTitle);

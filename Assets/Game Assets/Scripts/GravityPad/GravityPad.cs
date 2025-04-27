@@ -5,76 +5,102 @@ using System.Collections.Generic;
 public class GravityPad : MonoBehaviour
 {
     [Header("Force Settings")]
-    public Vector3 forceDirection = Vector3.up;
     public float forceStrength = 100f;
 
-    [Header("Arrow Visual Settings")]
-    public GameObject arrowPrefab;
-    public float arrowSpacing = 0.35f;
-    public float arrowScale = 0.4f;
-    public float arrowSpeed = 0.5f;
+    [Header("Arrow Movement Settings")]
+    [Range(0f, 1f)]
+    public float arrowSpeedToForceStrengthRatio = 0.5f;
 
-    private List<Transform> arrows = new List<Transform>();
+    [Header("Arrow Layout Settings")]
+    public GameObject arrowPrefab;
+
+    [Tooltip("Number of additional strips horizontally. 0 = 1x1 centered, 1 = 3x3 grid, 2 = 5x5 grid, etc.")]
+    [Min(0)]
+    public int additionalStripsHorizontal = 1;
+    public float horizontalStripSpacing = 0.33f;
+
+    [Tooltip("Number of additional arrows vertically along each strip. 0 = center arrow only, 1 = 3 arrows, 2 = 5 arrows, etc.")]
+    [Min(0)]
+    public int additionalArrowsVertical = 3;
+    public float verticalArrowSpacing = 0.33f;
+
+    // Constants
+    private const float _arrowLocalScale = 0.3f;
+
+    // Internal Buffers
+    private List<Transform> _arrowInstances = new List<Transform>();
+
+    // Precomputed Values
+    private float _arrowSpeed;
+    private float _localWrapThreshold;
+    private float _localWrapResetOffset;
 
     void Start()
     {
-        BoxCollider box = GetComponent<BoxCollider>();
-        Vector3 padSize = box.size;
-
-        float[] positions = { -arrowSpacing, 0f, arrowSpacing };
-
-        foreach (float x in positions)
+        // Remove any manually placed arrows under GravityPad
+        foreach (Transform child in transform)
         {
-            foreach (float y in new List<float>() { -arrowSpacing, 0f, arrowSpacing, arrowSpacing + arrowSpacing })
+            if (child.name.Contains("Arrow"))
             {
-                foreach (float z in positions)
+                Destroy(child.gameObject);
+            }
+        }
+
+        _arrowSpeed = arrowSpeedToForceStrengthRatio * forceStrength * 0.03f;
+        _localWrapThreshold = verticalArrowSpacing * (additionalArrowsVertical + 1);
+        _localWrapResetOffset = verticalArrowSpacing * ((additionalArrowsVertical * 2) + 1);
+
+        for (int xIdx = -additionalStripsHorizontal; xIdx <= additionalStripsHorizontal; ++xIdx)
+        {
+            for (int zIdx = -additionalStripsHorizontal; zIdx <= additionalStripsHorizontal; ++zIdx)
+            {
+                for (int yIdx = -additionalArrowsVertical; yIdx <= additionalArrowsVertical; ++yIdx)
                 {
-                    Vector3 localPos = new Vector3(x, y, z);
+                    Vector3 localPos = new Vector3(
+                        xIdx * horizontalStripSpacing,
+                        yIdx * verticalArrowSpacing,
+                        zIdx * horizontalStripSpacing
+                    );
+
                     Vector3 worldPos = transform.TransformPoint(localPos);
 
                     GameObject arrow = Instantiate(arrowPrefab, worldPos, Quaternion.identity, transform);
-                    arrow.transform.localScale = Vector3.one * arrowScale;
-                    arrow.transform.rotation = Quaternion.LookRotation(forceDirection.normalized);
 
-                    arrows.Add(arrow.transform);
+                    arrow.transform.localScale = Vector3.one * _arrowLocalScale;
+                    arrow.transform.rotation = transform.rotation * Quaternion.Euler(-90, 0, 0);    // Arrows point "up" relative to GravityPad rotation
+
+                    _arrowInstances.Add(arrow.transform);
                 }
             }
         }
     }
 
-
     void Update()
     {
-        Vector3 localForceDir = transform.InverseTransformDirection(forceDirection.normalized);
-        Vector3 worldForceDir = forceDirection.normalized;
+        // TODO: Move this to Start() if we end up not rotating GravityPads dynamically
+        Vector3 localUp = transform.InverseTransformDirection(transform.up);
 
-        for (int i = 0; i < arrows.Count; i++)
+        foreach (Transform arrow in _arrowInstances)
         {
-            Transform arrow = arrows[i];
+            arrow.localPosition += localUp * _arrowSpeed * Time.deltaTime;
 
-            // Move in local space
-            arrow.localPosition += localForceDir * arrowSpeed * Time.deltaTime;
-
-            // Wrap around if outside the bounds of the cube
-            Vector3 p = arrow.localPosition;
-            // Calculate dynamic half-extents based on parent scale
-            //Vector3 halfScale = transform.localScale * 0.5f;
-            Vector3 halfScale = transform.localScale * 0.75f; // giving it a buffer for wrap-around
-
-            if (Mathf.Abs(p.x) > halfScale.x) p.x = -Mathf.Sign(p.x) * halfScale.x;
-            if (Mathf.Abs(p.y) > halfScale.y) p.y = -Mathf.Sign(p.y) * halfScale.y;
-            if (Mathf.Abs(p.z) > halfScale.z) p.z = -Mathf.Sign(p.z) * halfScale.z;
-
-            arrow.localPosition = p;
+            // Smooth wrap-around on Y
+            if (arrow.localPosition.y > _localWrapThreshold)
+            {
+                Vector3 p = arrow.localPosition;
+                p.y -= _localWrapResetOffset;
+                arrow.localPosition = p;
+            }
         }
     }
 
+    // TODO: If we want bounces to count, need to modify Box Collider IsTrigger = false and then modify the below function
     void OnTriggerStay(Collider other)
     {
         Rigidbody rb = other.attachedRigidbody;
         if (rb != null)
         {
-            Vector3 worldForce = transform.TransformDirection(forceDirection.normalized) * forceStrength;
+            Vector3 worldForce = transform.up * forceStrength;
             rb.AddForce(worldForce, ForceMode.Acceleration);
         }
     }
