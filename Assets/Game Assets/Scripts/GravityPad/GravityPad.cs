@@ -60,8 +60,8 @@ public class GravityPad : MonoBehaviour
         }
 
         _arrowSpeed = arrowSpeedToForceStrengthRatio * forceStrength * 0.03f;
-        _localWrapThreshold = verticalArrowSpacing * (additionalArrowsVertical + 1);
-        _localWrapResetOffset = verticalArrowSpacing * ((additionalArrowsVertical * 2) + 1);
+        _localWrapThreshold = (verticalArrowSpacing / transform.lossyScale.y) * (additionalArrowsVertical + 1);
+        _localWrapResetOffset = (verticalArrowSpacing / transform.lossyScale.y) * ((additionalArrowsVertical * 2) + 1);
 
         for (int xIdx = -additionalStripsHorizontal; xIdx <= additionalStripsHorizontal; ++xIdx)
         {
@@ -75,11 +75,16 @@ public class GravityPad : MonoBehaviour
                         zIdx * horizontalStripSpacing
                     );
 
-                    Vector3 worldPos = transform.TransformPoint(localPos);
+                    Vector3 worldPos = transform.position + (transform.rotation * localPos);
 
-                    GameObject arrow = Instantiate(arrowPrefab, worldPos, Quaternion.identity, transform);
+                    GameObject arrow = Instantiate(arrowPrefab, worldPos, Quaternion.identity);
 
-                    arrow.transform.localScale = Vector3.one * _arrowLocalScale;
+                    arrow.transform.SetParent(transform, worldPositionStays: true);
+                    arrow.transform.localScale = new Vector3(
+                            _arrowLocalScale / transform.lossyScale.x,
+                            _arrowLocalScale / transform.lossyScale.y,
+                            _arrowLocalScale / transform.lossyScale.z
+                    );
                     arrow.transform.rotation = transform.rotation * Quaternion.Euler(-90, 0, 0);    // Arrows point "up" relative to GravityPad rotation
 
                     var renderer = arrow.GetComponent<MeshRenderer>();
