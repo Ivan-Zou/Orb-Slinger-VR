@@ -15,6 +15,7 @@ TagManager:
   - Spawner
   - Redirector
   - Title
+  - GravityPad
   layers:
   - Default
   - TransparentFX
