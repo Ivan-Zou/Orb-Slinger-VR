@@ -35,8 +35,21 @@ public class GravityPad : MonoBehaviour
     private float _localWrapThreshold;
     private float _localWrapResetOffset;
 
+    private MaterialPropertyBlock _mpb;
+    private int _gravityPadMatrixID;
+
     void Start()
     {
+        _gravityPadMatrixID = Shader.PropertyToID("_GravityPadWorldToLocal");
+        _mpb = new MaterialPropertyBlock();
+        _mpb.SetMatrix(_gravityPadMatrixID, transform.worldToLocalMatrix);
+
+        // Assume your BoxCollider defines pad size
+        BoxCollider box = GetComponent<BoxCollider>();
+        Vector3 halfSize = Vector3.Scale(box.size, transform.localScale) * 0.5f;
+
+        _mpb.SetVector("_PadHalfSize", halfSize);
+
         // Remove any manually placed arrows under GravityPad
         foreach (Transform child in transform)
         {
@@ -69,6 +82,12 @@ public class GravityPad : MonoBehaviour
                     arrow.transform.localScale = Vector3.one * _arrowLocalScale;
                     arrow.transform.rotation = transform.rotation * Quaternion.Euler(-90, 0, 0);    // Arrows point "up" relative to GravityPad rotation
 
+                    var renderer = arrow.GetComponent<MeshRenderer>();
+                    if (renderer != null)
+                    {
+                        renderer.SetPropertyBlock(_mpb);
+                    }
+
                     _arrowInstances.Add(arrow.transform);
                 }
             }
@@ -79,6 +98,8 @@ public class GravityPad : MonoBehaviour
     {
         // TODO: Move this to Start() if we end up not rotating GravityPads dynamically
         Vector3 localUp = transform.InverseTransformDirection(transform.up);
+        // TODO: Remove this if we end up not rotating GravityPads dynamically
+        _mpb.SetMatrix(_gravityPadMatrixID, transform.worldToLocalMatrix);
 
         foreach (Transform arrow in _arrowInstances)
         {
@@ -90,6 +111,13 @@ public class GravityPad : MonoBehaviour
                 Vector3 p = arrow.localPosition;
                 p.y -= _localWrapResetOffset;
                 arrow.localPosition = p;
+            }
+
+            // TODO: Remove this if we end up not rotating GravityPads dynamically
+            var renderer = arrow.GetComponent<MeshRenderer>();
+            if (renderer != null)
+            {
+                renderer.SetPropertyBlock(_mpb);
             }
         }
     }
