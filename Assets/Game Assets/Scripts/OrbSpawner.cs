@@ -50,11 +50,11 @@ public class OrbSpawner : MonoBehaviour {
         Vector3 spawnPos = transform.position;
 
         if (spawnInPlace) {
-            spawnPos += new Vector3(index * spawnGap, 0, 0);
+            spawnPos += transform.rotation * new Vector3(index * spawnGap, 0, 0);
         } else {
             float randX = Random.Range(-spawnAreaSizeX / 2.0f, spawnAreaSizeX / 2.0f);
             float randZ = Random.Range(-spawnAreaSizeZ / 2.0f, spawnAreaSizeZ / 2.0f);
-            spawnPos += new Vector3(randX, 0, randZ);
+            spawnPos += transform.rotation * new Vector3(randX, 0, randZ);
         }
 
         spawnPos.y = spawnHeightY;
