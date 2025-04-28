@@ -143,6 +143,7 @@ public abstract class GameState : MonoBehaviour
             // Spawn the Pause Menu only if not already open
             if (activePauseMenuInstance == null && resultMenu != null)
             {
+                SetHiScore(playerScore);
                 activePauseMenuInstance = Instantiate(resultMenu);
                 activePauseMenuInstance.GetComponent<ResultMenu>()?.SetTitle("Paused");
             }
