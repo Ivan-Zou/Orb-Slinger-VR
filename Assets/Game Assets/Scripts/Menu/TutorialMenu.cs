@@ -32,4 +32,9 @@ public class TutorialMenu : MonoBehaviour
     {
         descriptionText.SetText(description);
     }
+
+    public void SetDescriptionFontSize(float fontSize)
+    {
+        descriptionText.fontSize = fontSize;
+    }
 }

@@ -38,28 +38,74 @@ public class TutorialGameState : GameState
     public AudioClip stepCompleteSound;
     private AudioSource audioSource;
 
+    private float orbTypesLearnedTimer = 0f;
+    private bool orbTypesStepStarted = false;
+    private float orbTypesLearnedTimeLength = 30f;
+
+    private int lastRecordedScore = 0;
+    private bool targetHitInit = false;
+
+    private bool orbTouchedGravityPad = false;
+
     private void SetupTutorial()
     {
         tutorialSteps.Add(new TutorialStep(
+            "Orb Types",
+            "• Standard (Red) - predictable, loses momentum per bounce\n" +
+            "• Pulse (Yellow) - builds momentum with each bounce\n" +
+            "• Splitter (Cyan) - splits into three orbs after half a second\n" +
+            "• Sticky (White) - temporarily attaches to first contacted surface\n" +
+            "• Timed (Black) - explodes after its timer reaches 0\n\n" +
+            "Each orb behaves differently, and mastering their abilities is key to high-level play!",
+            () => LearnedAboutOrbTypes()
+        ));
+
+        tutorialSteps.Add(new TutorialStep(
             "Pick up an orb",
-            "Learn how to pick up orbs using your controller’s grip button, typically located along the side where your fingers naturally rest. Move your hand close to an orb and squeeze the grip button to pick it up. In Orb Slinger VR, picking up orbs is the core of your interaction - you'll need to master this mechanic to prepare your shots, charge up your throws, and aim precisely at targets across the environment.",
+            "Learn how to pick up orbs using your controller’s grip button, typically located along the side where your fingers naturally rest. " +
+            "Move your hand close to an orb and squeeze the grip button to pick it up. " +
+            "In Orb Slinger VR, picking up orbs is the core of your interaction - " +
+            "you'll need to master this mechanic to prepare your shots, charge up your throws, and aim precisely at targets across the environment.",
             () => OrbPickedUp()
         ));
         tutorialSteps.Add(new TutorialStep(
             "Throw an orb",
-            "Practice throwing by releasing your grip at the right time while moving your hand in the desired direction. In Orb Slinger VR, your throw’s speed and arc determine how far and how accurately the orb travels. Learning to time your release and build momentum is key to making precise, powerful throws - a critical skill for overcoming later challenges and maximizing your score.",
+            "Practice throwing by releasing your grip at the right time while moving your hand in the desired direction. " +
+            "In Orb Slinger VR, your throw’s speed and arc determine how far and how accurately the orb travels. " +
+            "Learning to time your release and build momentum is key to making precise, powerful throws - " +
+            "a critical skill for overcoming later challenges and maximizing your score.",
             () => OrbThrown()
         ));
-
         tutorialSteps.Add(new TutorialStep(
             "Hit a target",
-            "Strike a target by first throwing an orb and bouncing it off the environment. In Orb Slinger VR, you can't simply throw directly - the orb must first bounce off a surface before it can score a hit on a target. This bouncing mechanic adds a layer of strategy and skill, requiring you to plan your shots, aim creatively, and master the game’s physics to chain together clever bank shots and tactical attacks.",
+            "Strike a target by first throwing an orb and bouncing it off the environment. " +
+            "In Orb Slinger VR, you can't simply throw directly - the orb must first bounce off a surface before it can score a hit on a target. " +
+            "This bouncing mechanic adds a layer of strategy and skill, requiring you to plan your shots, aim creatively, " +
+            "and master the game’s physics to chain together clever bank shots and tactical attacks.",
             () => TargetHit()
         ));
-
+        tutorialSteps.Add(new TutorialStep(
+            "Redirectors",
+            "In Orb Slinger VR, some redirectors can be rotated to change the orb's bounce direction.\n\n" +
+            "• Green Redirectors are fixed\n" +
+            "• Magenta Redirectors can be rotated\n\n" +
+            "To rotate a magenta redirector, point your controller at it and hold the grip button - while gripping, the redirector will rotate based on your hand’s motion!",
+            () => RedirectorGrabbed()
+        ));
+        tutorialSteps.Add(new TutorialStep(
+            "Gravity Pads",
+            "Gravity Pads exert gravitational force on orbs!\n\n" +
+            "• Arrows show the force direction and speed\n" +
+            "• Use Gravity Pads to redirect or accelerate your throws\n\n" +
+            "Watch how the arrows move - faster arrows mean stronger gravitational force.",
+            () => OrbPassedThroughGravityPad()
+        ));
         tutorialSteps.Add(new TutorialStep(
             "Pause Menu",
-            "Learn how to pause/resume the game at any time by pressing the designated pause button on your controller (the menu button on your left controller for the Meta Quest). Opening the pause menu lets you take a break, view your score, or Restart/Exit the Gameplay Level. Knowing how to quickly access the pause menu is important for staying comfortable and in control during longer or more intense gameplay.",
+            "Learn how to pause/resume the game at any time by pressing " +
+            "the designated pause button on your controller (the menu button on your left controller for the Meta Quest). " +
+            "Opening the pause menu lets you take a break, view your score, or Restart/Exit the Gameplay Level. " +
+            "Knowing how to quickly access the pause menu is important for staying comfortable and in control during longer or more intense gameplay.",
             () => PauseMenuOpened()
         ));
 
@@ -74,6 +120,8 @@ public class TutorialGameState : GameState
             }
 
             UpdateTutorialMenu(false);
+
+            activeTutorialMenu.SetDescriptionFontSize(5);
         }
     }
 
@@ -81,6 +129,8 @@ public class TutorialGameState : GameState
     {
         if (activeTutorialMenu == null)
             return;
+
+        activeTutorialMenu.SetDescriptionFontSize(6);
 
         if (withSoundAndAnimation)
         {
@@ -205,6 +255,19 @@ public class TutorialGameState : GameState
         }
     }
 
+    private bool LearnedAboutOrbTypes()
+    {
+        if (!orbTypesStepStarted)
+        {
+            orbTypesStepStarted = true;
+            orbTypesLearnedTimer = 0f;
+        }
+
+        orbTypesLearnedTimer += Time.deltaTime;
+
+        return orbTypesLearnedTimer >= orbTypesLearnedTimeLength;
+    }
+
     private bool OrbPickedUp()
     {
         foreach (GameObject grabController in grabControllers)
@@ -240,9 +303,6 @@ public class TutorialGameState : GameState
         return false;
     }
 
-    private int lastRecordedScore = 0;
-    private bool targetHitInit = false;
-
     private bool TargetHit()
     {
         if (!targetHitInit)
@@ -255,6 +315,39 @@ public class TutorialGameState : GameState
             return true;
         }
         return false;
+    }
+
+    private bool RedirectorGrabbed()
+    {
+        foreach (GameObject grabController in grabControllers)
+        {
+            var interactors = grabController.GetComponentsInChildren<XRBaseInteractor>(true);
+            foreach (var interactor in interactors)
+            {
+                if (interactor != null && interactor.hasSelection)
+                {
+                    foreach (var interactable in interactor.interactablesSelected)
+                    {
+                        if (interactable.transform.CompareTag("Redirector"))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // Called from GravityPad.cs
+    public void OnOrbTouchedGravityPad()
+    {
+        orbTouchedGravityPad = true;
+    }
+
+    private bool OrbPassedThroughGravityPad()
+    {
+        return orbTouchedGravityPad;
     }
 
     private bool PauseMenuOpened()
