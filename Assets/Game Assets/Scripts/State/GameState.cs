@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using UnityEngine.InputSystem;
 
 public abstract class GameState : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public abstract class GameState : MonoBehaviour
 
     GameObject[] grabControllers;
     GameObject[] menuControllers;
+
+    public InputActionReference pauseAction;
+    private bool isPaused = false;
+    private GameObject activePauseMenuInstance = null;
 
     protected virtual void Start() {
         // Set TimeScale to 1.0f
@@ -31,6 +36,12 @@ public abstract class GameState : MonoBehaviour
         // Disable Menu Controllers
         foreach (GameObject menuController in menuControllers) {
             menuController.SetActive(false);
+        }
+
+        if (pauseAction != null)
+        {
+            pauseAction.action.Enable();
+            pauseAction.action.performed += OnPausePressed;
         }
     }
 
@@ -92,5 +103,71 @@ public abstract class GameState : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update() {
         CheckWinLoss();
+    }
+
+    private void OnDestroy()
+    {
+        if (pauseAction != null)
+        {
+            pauseAction.action.performed -= OnPausePressed;
+            pauseAction.action.Disable();
+        }
+    }
+
+    private void OnPausePressed(InputAction.CallbackContext context)
+    {
+        if (gameOver) return;
+
+        TogglePauseMenu();
+    }
+
+    private void TogglePauseMenu()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+
+            // Disable Grab Controllers
+            foreach (GameObject grabController in grabControllers)
+            {
+                grabController.SetActive(false);
+            }
+            // Enable Menu Controllers
+            foreach (GameObject menuController in menuControllers)
+            {
+                menuController.SetActive(true);
+            }
+
+            // Spawn the Pause Menu only if not already open
+            if (activePauseMenuInstance == null && resultMenu != null)
+            {
+                activePauseMenuInstance = Instantiate(resultMenu);
+                activePauseMenuInstance.GetComponent<ResultMenu>()?.SetTitle("Paused");
+            }
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            
+            // Disable Menu Controllers
+            foreach (GameObject menuController in menuControllers)
+            {
+                menuController.SetActive(false);
+            }
+            // Enable Grab Controllers
+            foreach (GameObject grabController in grabControllers)
+            {
+                grabController.SetActive(true);
+            }
+
+            // Destroy the Pause Menu if it exists
+            if (activePauseMenuInstance != null)
+            {
+                Destroy(activePauseMenuInstance);
+                activePauseMenuInstance = null;
+            }
+        }
     }
 }
