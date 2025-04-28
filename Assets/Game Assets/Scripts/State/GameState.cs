@@ -12,12 +12,12 @@ public abstract class GameState : MonoBehaviour
     protected bool gameOver = false;
     protected string resultTitle = "";
 
-    GameObject[] grabControllers;
+    protected GameObject[] grabControllers;
     GameObject[] menuControllers;
 
     public InputActionReference pauseAction;
     private bool isPaused = false;
-    private GameObject activePauseMenuInstance = null;
+    protected GameObject activePauseMenuInstance = null;
 
     protected virtual void Start() {
         // Set TimeScale to 1.0f
