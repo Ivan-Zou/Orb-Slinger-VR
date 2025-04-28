@@ -1706,7 +1706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f4c6faaad66e542a8c0686a18891b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 5
+  level: 4
 --- !u!114 &294439253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1758,7 +1758,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2864,7 +2864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f4c6faaad66e542a8c0686a18891b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 4
+  level: 3
 --- !u!114 &645092061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2911,12 +2911,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2061951404}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: togglePanels
-        m_Mode: 1
+        m_MethodName: loadLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3496,7 +3496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f4c6faaad66e542a8c0686a18891b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 3
+  level: 2
 --- !u!114 &1059503726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3548,7 +3548,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4890,7 +4890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f4c6faaad66e542a8c0686a18891b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
+  level: 1
 --- !u!114 &1441680431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4942,7 +4942,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
