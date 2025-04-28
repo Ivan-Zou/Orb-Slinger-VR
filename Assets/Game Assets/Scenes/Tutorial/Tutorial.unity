@@ -6752,6 +6752,7 @@ MonoBehaviour:
   resultMenu: {fileID: 5811499242614116172, guid: 8d4d6ef6f07757b4185a1e37da277c76, type: 3}
   pauseAction: {fileID: -454758831520679338, guid: 1e5d63472c5614d4aa073fdf613a769b, type: 3}
   tutorialMenu: {fileID: 5811499242614116172, guid: dfafcc48141c91440828372dd71c991d, type: 3}
+  stepCompleteSound: {fileID: 8300000, guid: 1234f97aa4e400c44ab60ba09b809b63, type: 3}
 --- !u!224 &1597572931 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2498173523770679591, guid: f551c05e24299d541bbd421cd3538754, type: 3}

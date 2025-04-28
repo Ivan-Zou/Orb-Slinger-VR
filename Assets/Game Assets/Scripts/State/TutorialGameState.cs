@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +24,7 @@ public class TutorialGameState : GameState
 {
     public GameObject tutorialMenu;
     private TutorialMenu activeTutorialMenu;
+    private Vector3 activeTutorialMenuInitEuler;
 
     private List<TutorialStep> tutorialSteps = new List<TutorialStep>();
     private int currentStepIndex = 0;
@@ -32,6 +34,9 @@ public class TutorialGameState : GameState
     private const float completeFadeoutDelay = 15f;
 
     private bool tutorialMenuHiddenForPause = false;
+
+    public AudioClip stepCompleteSound;
+    private AudioSource audioSource;
 
     private void SetupTutorial()
     {
@@ -63,14 +68,24 @@ public class TutorialGameState : GameState
             GameObject menuInstance = Instantiate(tutorialMenu);
             activeTutorialMenu = menuInstance.GetComponent<TutorialMenu>();
 
-            UpdateTutorialMenu();
+            if (activeTutorialMenu != null)
+            {
+                activeTutorialMenuInitEuler = activeTutorialMenu.transform.eulerAngles;
+            }
+
+            UpdateTutorialMenu(false);
         }
     }
 
-    private void UpdateTutorialMenu()
+    private void UpdateTutorialMenu(bool withSoundAndAnimation)
     {
         if (activeTutorialMenu == null)
             return;
+
+        if (withSoundAndAnimation)
+        {
+            PlayStepCompleteFeedback();
+        }
 
         if (!tutorialComplete && currentStepIndex < tutorialSteps.Count)
         {
@@ -84,9 +99,40 @@ public class TutorialGameState : GameState
         }
     }
 
+    private void PlayStepCompleteFeedback()
+    {
+        if (audioSource != null && stepCompleteSound != null && activeTutorialMenu != null)
+        {
+            AudioSource.PlayClipAtPoint(stepCompleteSound, activeTutorialMenu.transform.position);
+            StartCoroutine(RotateMenuCoroutine());
+        }
+    }
+
+    private IEnumerator RotateMenuCoroutine()
+    {
+        float elapsed = 0f;
+        float duration = 1f;
+        float rotationAmount = 360f;
+
+        while (elapsed < duration)
+        {
+            float deltaRotation = (rotationAmount / duration) * Time.unscaledDeltaTime;
+            //activeTutorialMenu.transform.Rotate(0f, deltaRotation, 0f, Space.World);
+            activeTutorialMenu.transform.Rotate(Vector3.up, deltaRotation, Space.Self);
+
+            elapsed += Time.unscaledDeltaTime; // Important: unscaled so it still works if Time.timeScale == 0 (paused)
+            yield return null;
+        }
+
+        activeTutorialMenu.transform.eulerAngles = activeTutorialMenuInitEuler;
+    }
+
     protected override void Start() {
         base.Start();
         resultTitle = "Result";
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
 
         SetupTutorial();
     }
@@ -149,13 +195,13 @@ public class TutorialGameState : GameState
             if (tutorialSteps[currentStepIndex].CompletionCheck())
             {
                 currentStepIndex++;
-                UpdateTutorialMenu();
+                UpdateTutorialMenu(true);
             }
         }
         else
         {
             tutorialComplete = true;
-            UpdateTutorialMenu();
+            UpdateTutorialMenu(true);
         }
     }
 
