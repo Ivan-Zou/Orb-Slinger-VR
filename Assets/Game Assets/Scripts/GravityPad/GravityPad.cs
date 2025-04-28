@@ -150,8 +150,8 @@ public class GravityPad : MonoBehaviour
 
         if (orbCounter != null && rb != null && orbCounter.hasBeenThrown && !_bouncedBodies.Contains(rb))
         {
-            orbCounter.bounceCount++;
-            _bouncedBodies.Add(rb);
+            //orbCounter.bounceCount++;
+            //_bouncedBodies.Add(rb);
 
             // Tell tutorial that an orb touched a GravityPad
             if (_tutorialGameState != null)

@@ -35,6 +35,7 @@ public class OrbLifetimeManager : MonoBehaviour {
         if (hasBeenThrown && collision.relativeVelocity.magnitude > 0.01f) {
             bounceCount++;
             if (bounceCount >= maxBounces) {
+                Debug.Log("Destory orb on Bounce");
                 Destroy(gameObject);
                 // Respawn the orb if its a Timed Orb
                 TimedOrb timed = gameObject.GetComponent<TimedOrb>();
@@ -52,6 +53,7 @@ public class OrbLifetimeManager : MonoBehaviour {
         if (speed < speedThreshold) {
             lowSpeedTimer += 0.1f;
             if (lowSpeedTimer >= minSpeedDuration) {
+                Debug.Log("Destory orb on low speed");
                 Destroy(gameObject);
                 // Respawn the orb if its a Timed Orb
                 TimedOrb timed = gameObject.GetComponent<TimedOrb>();

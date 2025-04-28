@@ -361,10 +361,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87d56b742627f947a99c84956f6d4d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedThreshold: 0.5
+  speedThreshold: 1
   checkDelay: 1
   maxBounces: 30
-  minSpeedDuration: 2.5
+  minSpeedDuration: 3
   hasBeenThrown: 0
 --- !u!114 &3359814727442489794
 MonoBehaviour:
