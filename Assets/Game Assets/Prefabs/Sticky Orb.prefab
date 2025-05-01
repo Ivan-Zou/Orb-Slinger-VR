@@ -363,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedThreshold: 1
   checkDelay: 1
-  maxBounces: 30
+  maxBounces: 10
   minSpeedDuration: 3
   hasBeenThrown: 0
 --- !u!114 &3359814727442489794

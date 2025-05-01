@@ -7,23 +7,27 @@ public class TrickshotGameState : GameState
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public int attempts = 5;
+
+    public int numOrbs = 0;
     public int levelNo;
     public int remainingTargets = 1;
+    public int bonusPoints = 100;
 
     protected override void Start() {
         base.Start();
         resultTitle = "Defeat";
         attempts = GameObject.FindGameObjectsWithTag("Orb").Length;
+        numOrbs = attempts;
         remainingTargets = GameObject.FindGameObjectsWithTag("Scoreable").Length;
     }
 
     protected override void CheckWinLoss()
     {
-        gameOver = attempts == 0 || remainingTargets == 0;
+        gameOver = numOrbs == 0 || remainingTargets == 0;
         if (gameOver) {
             if (remainingTargets == 0) {
                 resultTitle = "Victory";
-                PlayerPrefs.SetInt("LevelUnlocked", Math.Max(PlayerPrefs.GetInt("LevelUnlocked", 1), levelNo + 1));
+                playerScore += bonusPoints * attempts;
             }
         }
         base.CheckWinLoss();
@@ -46,7 +50,16 @@ public class TrickshotGameState : GameState
     // Update is called once per frame
     protected override void Update() {
         base.Update();
-        attempts = GameObject.FindGameObjectsWithTag("Orb").Length;
+        GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
+        numOrbs = orbs.Length;
+        attempts = 0;
+        foreach (GameObject orb in orbs) {
+            SplitterOrb so = orb.GetComponent<SplitterOrb>();
+            if (so == null || so.canSplit) {
+                attempts += 1;
+            }
+        }
+        // attempts = GameObject.FindGameObjectsWithTag("Orb").Length;
         remainingTargets = GameObject.FindGameObjectsWithTag("Scoreable").Length;
     }
 }
