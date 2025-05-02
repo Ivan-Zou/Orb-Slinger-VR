@@ -12,6 +12,7 @@ public class TimedOrb : MonoBehaviour {
 
     OrbSpawner spawner;
     bool hasExploded = false;
+    EndlessGameState state;
 
     public void SetSpawner(OrbSpawner spawnerRef) {
         spawner = spawnerRef;
@@ -22,6 +23,7 @@ public class TimedOrb : MonoBehaviour {
         // countdownText = GetComponent<TMP_Text>();
         timeRemaining = lifetime;
         hasExploded = false;
+        state = GameObject.FindGameObjectWithTag("State").GetComponent<EndlessGameState>(); 
     }
 
     // Update is called once per frame
@@ -46,6 +48,10 @@ public class TimedOrb : MonoBehaviour {
 
         // Play explosion sound
         AudioSource.PlayClipAtPoint(explosionSound, gameObject.transform.position);
+
+        if (state != null) {
+            state.SubtractLife();
+        }
 
         // Respawn the orb
         spawner.OnTimedOrbDestroyed();

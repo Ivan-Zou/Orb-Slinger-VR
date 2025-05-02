@@ -1,16 +1,23 @@
 using UnityEngine;
 
-public class TargetSpawner : MonoBehaviour
+public class TimedTargetSpawner : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject[] targetPrefabs;
     public GameObject scoreZonePrefab;
     public GameObject playPlat;
+    public AudioClip spawnSound;
     public float xMin, xMax, yMin, yMax, zMin, zMax = 0.0f;
     public int maxTargets = 5;
     public int maxScoreZone = 2;
+
+    void Start() {
+        for (int i = 0; i < maxTargets; ++i) {
+            SpawnTarget(false);
+        }
+    }
     
-    void SpawnTarget() {
+    void SpawnTarget(bool playSound = true) {
         int targetIdx = Random.Range(0, targetPrefabs.Length);
         float xPos = Random.Range(xMin, xMax);
         float yPos = Random.Range(yMin, yMax);
@@ -27,6 +34,9 @@ public class TargetSpawner : MonoBehaviour
                 targetMover.yDistance = Random.Range(0, 3);
                 targetMover.zDistance = Random.Range(0, 3);
             }
+        }
+        if (playSound) {
+            AudioSource.PlayClipAtPoint(spawnSound, initialPos);
         }
     }
 
