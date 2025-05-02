@@ -18,9 +18,7 @@ public class TargetSpawner : MonoBehaviour
         Vector3 initialPos = new Vector3(xPos, yPos, zPos);
         GameObject target = Instantiate(targetPrefabs[targetIdx], initialPos, Quaternion.identity);
         target.transform.LookAt(playPlat.transform);
-        target.transform.Rotate(new Vector3(90, 0, 0));
-        // Vector3 lookDir = Vector3.RotateTowards(target.transform.up, -initialPos, 2 * 3.14159f, 180.0f);
-        // target.transform.rotation = Quaternion.LookRotation(lookDir);
+        target.transform.eulerAngles = new Vector3(90, target.transform.eulerAngles.y, target.transform.eulerAngles.z);
         if (Random.Range(0, 2) < 1) {
             TargetMover targetMover = target.GetComponent<TargetMover>();
             if (targetMover != null) {
