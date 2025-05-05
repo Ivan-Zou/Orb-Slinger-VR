@@ -29,8 +29,6 @@ public class TutorialGameState : GameState
     private int currentStepIndex = 0;
 
     private bool tutorialComplete = false;
-    private float tutorialCompleteTimer = 0f;
-    private const float completeFadeoutDelay = 15f;
 
     private bool tutorialMenuHiddenForPause = false;
 
@@ -228,12 +226,6 @@ public class TutorialGameState : GameState
     {
         if (tutorialComplete)
         {
-            tutorialCompleteTimer += Time.deltaTime;
-            if (tutorialCompleteTimer >= completeFadeoutDelay && activeTutorialMenu != null)
-            {
-                Destroy(activeTutorialMenu.gameObject);
-                activeTutorialMenu = null;
-            }
             return;
         }
 
