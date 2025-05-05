@@ -141,32 +141,49 @@ public class GravityPad : MonoBehaviour
         }
     }
 
-    private HashSet<Rigidbody> _bouncedBodies = new HashSet<Rigidbody>();
-
     private void OnTriggerEnter(Collider other)
     {
-        var orbCounter = other.GetComponent<OrbBounceCounter>();
-        Rigidbody rb = other.attachedRigidbody;
-
-        if (orbCounter != null && rb != null && orbCounter.hasBeenThrown && !_bouncedBodies.Contains(rb))
+        if (_tutorialGameState != null)
         {
-            //orbCounter.bounceCount++;
-            //_bouncedBodies.Add(rb);
+            var orbCounter = other.GetComponent<OrbBounceCounter>();
+            Rigidbody rb = other.attachedRigidbody;
 
-            // Tell tutorial that an orb touched a GravityPad
-            if (_tutorialGameState != null)
+            if (orbCounter != null && rb != null && orbCounter.hasBeenThrown)
             {
+                // Tell tutorial that an orb touched a GravityPad
                 _tutorialGameState.OnOrbTouchedGravityPad();
             }
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        Rigidbody rb = other.attachedRigidbody;
-        if (rb != null)
-        {
-            _bouncedBodies.Remove(rb);
-        }
-    }
+    // BELOW WAS FOR ADDING A BOUNCE UPON GRAVITYPAD INTERACTION
+
+    //private HashSet<Rigidbody> _bouncedBodies = new HashSet<Rigidbody>();
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    var orbCounter = other.GetComponent<OrbBounceCounter>();
+    //    Rigidbody rb = other.attachedRigidbody;
+
+    //    if (orbCounter != null && rb != null && orbCounter.hasBeenThrown && !_bouncedBodies.Contains(rb))
+    //    {
+    //        orbCounter.bounceCount++;
+    //        _bouncedBodies.Add(rb);
+
+    //        // Tell tutorial that an orb touched a GravityPad
+    //        if (_tutorialGameState != null)
+    //        {
+    //            _tutorialGameState.OnOrbTouchedGravityPad();
+    //        }
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    Rigidbody rb = other.attachedRigidbody;
+    //    if (rb != null)
+    //    {
+    //        _bouncedBodies.Remove(rb);
+    //    }
+    //}
 }
