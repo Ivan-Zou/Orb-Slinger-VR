@@ -54,6 +54,9 @@ public class TimedOrb : MonoBehaviour {
         }
 
         // Respawn the orb
-        spawner.OnTimedOrbDestroyed();
+        if (spawner != null)
+        {
+            spawner.OnTimedOrbDestroyed();
+        }
     }
 }
