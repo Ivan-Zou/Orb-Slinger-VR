@@ -163,7 +163,7 @@ public class TutorialGameState : GameState
         while (elapsed < duration)
         {
             float deltaRotation = (rotationAmount / duration) * elapsed;
-            activeTutorialMenu.transform.rotation = Quaternion.Euler(0f, deltaRotation, 0f);
+            activeTutorialMenu.transform.rotation = Quaternion.Euler(0f, 0f, deltaRotation);
 
             elapsed += Time.unscaledDeltaTime; // Important: unscaled so it still works if Time.timeScale == 0 (paused)
             yield return null;
